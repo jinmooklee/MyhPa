@@ -9,6 +9,8 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     TextView TextView_hPa;
@@ -28,16 +30,17 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (pressure != null) {
             sensorManager.registerListener(this, pressure, SensorManager.SENSOR_DELAY_NORMAL);
         } else {
+            /* TODO : 기압센서 없으면 에러 메시지 띄우고 종료되게 */
             TextView_hPa.setText("N/A");
         }
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        //hPaOfPressure = (float) (Math.round(event.values[0]*100)/100.0);
         hPaOfPressure = event.values[0];
-        hPaOfPressure = (float) (Math.round(event.values[0]*100)/100.0);
-
-        TextView_hPa.setText( String.valueOf(hPaOfPressure) );
+        DecimalFormat df = new DecimalFormat("0000.00");
+        TextView_hPa.setText( df.format(hPaOfPressure) );
     }
 
     @Override
