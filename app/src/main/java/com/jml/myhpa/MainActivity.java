@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent event) {
         //hPaOfPressure = (float) (Math.round(event.values[0]*100)/100.0);
         hPaOfPressure = event.values[0];
-        DecimalFormat df = new DecimalFormat("0000.00");
+        DecimalFormat df = new DecimalFormat("#0.00");
         TextView_hPa.setText( df.format(hPaOfPressure) );
     }
 
